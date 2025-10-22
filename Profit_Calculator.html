@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit Calculator</title>
+    <style>
+
+    body {
+        background-color: #f4f4f9;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .mainDiv {
+        width: 100%;
+        max-width: 400px;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .mainDiv div {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-size: 16px;
+        color: #333;
+    }
+
+    input[type="number"], input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    input[type="text"] {
+        background-color: #f4f4f4;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 100%;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    p {
+        margin: 0;
+        font-size: 16px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .result-container {
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .profitResult, .totalResult {
+        font-weight: bold;
+        text-align: right;
+        color: #28a745;
+    }
+    .description {
+        margin-bottom: 20px;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="mainDiv">
+        <p class="description">This calculator helps you calculate your deposit profit based on the annual percentage rate (APY) for a given number of days.</p>
+        <div>
+            <label>Enter Deposit: </label>
+            <div><input type="number" class="deposit" id="deposit" value="" required></div>
+        </div>
+        <div>
+            <label>Enter APY: </label>
+            <div><input type="number" class="apy" id="apy" value="" required></div>
+        </div>
+        <div>
+            <label>Enter number of days: </label>
+            <div><input type="number" class="numberOfDays" id="numberOfDays" value="" required></div>
+        </div>
+        <div>
+            <button onclick="result()">Show Result</button>
+        </div>
+        <div>
+            <p>Profit: </p>
+            <div><input type="text" class="profitResult" id="profitResult" value="" readonly></div>
+        </div>
+        <div>
+            <p>Total: </p>
+            <div><input type="text" class="totalResult" id="totalResult" value="" readonly></div>
+        </div>
+        <div>
+            <button onclick="clearAll()">Clear</button>
+        </div>
+    </div>
+
+    <script>
+        function result() {
+            let deposit = parseFloat(document.getElementById("deposit").value);
+            let apy = parseFloat(document.getElementById("apy").value);
+            let numberOfDays = parseInt(document.getElementById("numberOfDays").value);
+            if (isNaN(deposit) || isNaN(apy) || isNaN(numberOfDays)) {
+                alert("Enter correctly numbers!");
+            }
+
+            let showProfit = (apy / 100) * (numberOfDays / 365) * deposit;
+            let showTotalSum = deposit + showProfit;
+
+            document.getElementById("profitResult").value = showProfit.toFixed(2);
+            document.getElementById("totalResult").value = showTotalSum.toFixed(2);
+        }
+        
+        function clearAll() {
+            document.getElementById("deposit").value = "";
+            document.getElementById("apy").value = "";
+            document.getElementById("numberOfDays").value = "";
+            document.getElementById("profitResult").value = "";
+            document.getElementById("totalResult").value = "";
+        }
+    </script>
+</body>
+</html>
